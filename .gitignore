@@ -76,10 +76,18 @@ temp/
 # Test artifacts
 # =========================
 *.mp4
-*.png
 *.webm
+
+# Ignora screenshots automáticos do Cypress
+cypress/screenshots/**/*.png
 
 # =========================
 # GitHub Pages generated
 # =========================
 gh-pages/
+
+# =========================
+# README images
+# =========================
+!img_readme/
+!img_readme/*.png
