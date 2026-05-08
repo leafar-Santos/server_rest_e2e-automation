@@ -1,4 +1,4 @@
-name: server_rest_e2e-automationPublic
+name: server_rest_e2e-automation
 
 on:
   push:
