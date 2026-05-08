@@ -6,15 +6,10 @@ on:
       - developer
       - main
 
-  pull_request:
-    branches:
-      - developer
-      - main
-
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -25,11 +20,17 @@ jobs:
     env:
       ENV_FILE: .env.qa
       CI: true
-      allure: true
 
     steps:
       - name: Checkout do projeto
         uses: actions/checkout@v4
+
+      - name: Buscar histórico do Allure
+        uses: actions/checkout@v4
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
 
       - name: Configurar Node.js
         uses: actions/setup-node@v4
@@ -40,43 +41,27 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
+      - name: Instalar Allure CLI
+        run: npm install -g allure-commandline@2.29.0
+
       - name: Executar testes Cypress
         run: npm run cy:run:qa
 
-      - name: Verificar Allure Results
+      - name: Copiar histórico anterior
         if: always()
         run: |
-          ls -la allure-results || true
-          find allure-results -type f || true
+          mkdir -p allure-results/history
+          cp -r gh-pages/history/* allure-results/history/ || true
 
-      - name: Instalar Allure CLI
-        if: always()
-        run: npm install -g allure-commandline@2.29.0
-
-      - name: Gerar relatório Allure
+      - name: Gerar relatório Allure com histórico
         if: always()
         run: allure generate allure-results --clean -o allure-report
 
-      - name: Upload Pages Artifact
+      - name: Publicar relatório no gh-pages
         if: always()
-        uses: actions/upload-pages-artifact@v4
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: allure-report
-
-  deploy-report:
-    if: always()
-    needs: cypress-run
-    runs-on: ubuntu-latest
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    permissions:
-      pages: write
-      id-token: write
-
-    steps:
-      - name: Publicar relatório no GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-report
+          keep_files: false
