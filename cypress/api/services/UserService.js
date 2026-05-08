@@ -1,5 +1,4 @@
 class UserService {
-
   create(user) {
     return cy.request({
       method: "POST",
@@ -22,6 +21,17 @@ class UserService {
       method: "GET",
       url: `${Cypress.env("apiUrl")}/usuarios/${userId}`,
       failOnStatusCode: false
+    });
+  }
+
+  findByEmail(email) {
+    return cy.request({
+      method: "GET",
+      url: `${Cypress.env("apiUrl")}/usuarios`,
+      failOnStatusCode: false,
+      qs: {
+        email
+      }
     });
   }
 

@@ -1,9 +1,12 @@
 {
   "validUser": {
-    "nome": "QA Cypress Front",
-    "emailPrefix": "qa.cypress.front",
-    "password": "teste123",
-    "administrador": "true"
+    "email": "usuario.teste@serverest.com",
+    "password": "teste123"
+  },
+  "invalidCredentials": {
+    "email": "usuario.invalido@test.com",
+    "password": "senhaInvalida123",
+    "expectedMessage": "Email e/ou senha inválidos"
   },
   "requiredFields": {
     "emailRequiredMessage": "Email é obrigatório",
