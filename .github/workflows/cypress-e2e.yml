@@ -13,6 +13,9 @@ on:
 
   workflow_dispatch:
 
+  permissions:
+  contents: write
+
 jobs:
   autotests:
     name: Run Cypress tests and generate Allure Report
