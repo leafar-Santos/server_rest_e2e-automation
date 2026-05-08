@@ -77,6 +77,18 @@ Com isso, o projeto fica:
 
 ---
 
+# Integração contínua
+
+O projeto possui pipeline configurada no GitHub Actions para:
+
+- Execução automatizada dos testes;
+- Geração do relatório Allure;
+- Publicação das evidências.
+
+![Git Actions](./img_readme/img5.png)
+
+---
+
 # Relatórios Allure
 
 O projeto possui integração com Allure Reports para geração de evidências automatizadas.
@@ -143,13 +155,4 @@ npm run test:allure:qa
 
 ---
 
-# Integração contínua
-
-O projeto possui pipeline configurada no GitHub Actions para:
-
-- Execução automatizada dos testes;
-- Geração do relatório Allure;
-- Publicação das evidências.
-
----
 
