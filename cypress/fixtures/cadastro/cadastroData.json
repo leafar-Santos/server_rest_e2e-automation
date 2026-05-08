@@ -1,0 +1,15 @@
+{
+  "validUser": {
+    "nome": "QA Cypress Cadastro",
+    "emailPrefix": "qa.cypress.cadastro",
+    "password": "teste123",
+    "administrador": "true"
+  },
+  "messages": {
+    "success": "Cadastro realizado com sucesso",
+    "emailAlreadyUsed": "Este email já está sendo usado",
+    "nameRequired": "Nome é obrigatório",
+    "emailRequired": "Email é obrigatório",
+    "passwordRequired": "Password é obrigatório"
+  }
+}

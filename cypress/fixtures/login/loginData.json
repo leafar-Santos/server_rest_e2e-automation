@@ -1,0 +1,12 @@
+{
+  "validUser": {
+    "nome": "QA Cypress Front",
+    "emailPrefix": "qa.cypress.front",
+    "password": "teste123",
+    "administrador": "true"
+  },
+  "requiredFields": {
+    "emailRequiredMessage": "Email é obrigatório",
+    "passwordRequiredMessage": "Password é obrigatório"
+  }
+}

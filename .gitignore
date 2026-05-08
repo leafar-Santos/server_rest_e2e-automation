@@ -1,0 +1,21 @@
+# Node
+node_modules/
+
+# Cypress
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+
+# Allure
+allure-results/
+allure-report/
+
+# Reports
+cypress/reports/
+
+# IDE
+.vscode/
+.idea/
+
+# Local env
+.env.local
