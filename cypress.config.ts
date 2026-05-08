@@ -1,6 +1,6 @@
-const { defineConfig } = require("cypress");
-const dotenv = require("dotenv");
-const { allureCypress } = require("allure-cypress/reporter");
+import { defineConfig } from "cypress";
+import dotenv from "dotenv";
+import { allureCypress } from "allure-cypress/reporter";
 
 const envFile = process.env.ENV_FILE || ".env.qa";
 
@@ -10,14 +10,14 @@ dotenv.config({
 
 const isCI = process.env.CI === "true";
 
-module.exports = defineConfig({
+export default defineConfig({
   retries: {
     runMode: isCI ? 2 : 1,
     openMode: 0
   },
 
   e2e: {
-    specPattern: "cypress/e2e/**/*.cy.js",
+    specPattern: "cypress/e2e/**/*.cy.ts",
     baseUrl: process.env.CYPRESS_BASE_URL || "https://front.serverest.dev",
     env: {
       apiUrl: process.env.CYPRESS_API_URL || "https://serverest.dev"

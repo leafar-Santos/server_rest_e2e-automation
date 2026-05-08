@@ -1,15 +1,15 @@
 import { cartSelectors } from "../selectors/cartSelectors";
 
 class CartAssertions {
-  shouldBeOnCartPage() {
+  shouldBeOnCartPage(): void {
     cy.url().should("include", "/minhaListaDeProdutos");
   }
 
-  shouldDisplayShoppingList() {
+  shouldDisplayShoppingList(): void {
     cy.contains("Lista de Compras").should("be.visible");
   }
 
-  shouldDisplayProductQuantity(expectedQuantity) {
+  shouldDisplayProductQuantity(expectedQuantity: number): void {
     cy.get(cartSelectors.productQuantity)
       .first()
       .should("contain.text", expectedQuantity);

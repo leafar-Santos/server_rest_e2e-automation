@@ -1,13 +1,25 @@
 import CadastroActions from "../../../frontend/actions/CadastroActions";
 import CadastroAssertions from "../../../frontend/assertions/CadastroAssertions";
 import { createUserPayload } from "../../../shared/utils/userFactory";
+import type { UserPayload } from "../../../shared/types/userTypes";
+
+interface CadastroFixture {
+  validUser: Partial<UserPayload> & { emailPrefix?: string };
+  messages: {
+    success: string;
+    emailAlreadyUsed: string;
+    nameRequired: string;
+    emailRequired: string;
+    passwordRequired: string;
+  };
+}
 
 describe("Cadastro de Usuário - Frontend", () => {
-  let createdUser;
-  let createdUserId = null;
+  let createdUser: UserPayload;
+  let createdUserId: string | null = null;
 
   before(() => {
-    cy.fixture("frontend/cadastro/cadastroData").then((cadastroData) => {
+    cy.fixture<CadastroFixture>("frontend/cadastro/cadastroData").then((cadastroData) => {
       createdUser = createUserPayload(cadastroData.validUser);
     });
   });
@@ -23,25 +35,25 @@ describe("Cadastro de Usuário - Frontend", () => {
   });
 
   it("deve cadastrar usuário com sucesso pelo front", () => {
-  cy.fixture("frontend/cadastro/cadastroData").then((cadastroData) => {
-    CadastroActions.register(
-      createdUser.nome,
-      createdUser.email,
-      createdUser.password
-    );
+    cy.fixture<CadastroFixture>("frontend/cadastro/cadastroData").then((cadastroData) => {
+      CadastroActions.register(
+        createdUser.nome,
+        createdUser.email,
+        createdUser.password
+      );
 
-    CadastroAssertions.shouldDisplaySuccessMessage(
-      cadastroData.messages.success
-    );
+      CadastroAssertions.shouldDisplaySuccessMessage(
+        cadastroData.messages.success
+      );
 
-    cy.getUserByEmail(createdUser.email).then((responseBody) => {
-      createdUserId = responseBody.usuarios[0]._id;
+      cy.getUserByEmail(createdUser.email).then((responseBody) => {
+        createdUserId = responseBody.usuarios[0]._id ?? null;
+      });
     });
   });
-});
 
   it("deve exibir erro ao tentar cadastrar usuário já existente", () => {
-    cy.fixture("frontend/cadastro/cadastroData").then((cadastroData) => {
+    cy.fixture<CadastroFixture>("frontend/cadastro/cadastroData").then((cadastroData) => {
       CadastroActions.register(
         createdUser.nome,
         createdUser.email,
@@ -55,7 +67,7 @@ describe("Cadastro de Usuário - Frontend", () => {
   });
 
   it("deve validar campos obrigatórios ao tentar cadastrar sem preencher dados", () => {
-    cy.fixture("frontend/cadastro/cadastroData").then((cadastroData) => {
+    cy.fixture<CadastroFixture>("frontend/cadastro/cadastroData").then((cadastroData) => {
       CadastroActions.submitCadastro();
 
       CadastroAssertions.shouldDisplayRequiredNameMessage(

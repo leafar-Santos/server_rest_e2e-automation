@@ -1,15 +1,15 @@
 import { homeSelectors } from "../selectors/homeSelectors";
 
 class HomePage {
-  visit() {
+  visit(): void {
     cy.visit("/home");
   }
 
-  addToCartButtons() {
+  addToCartButtons(): Cypress.Chainable<JQuery<HTMLElement>> {
     return cy.get(homeSelectors.addToCartButton);
   }
 
-  cartButton() {
+  cartButton(): Cypress.Chainable<JQuery<HTMLElement>> {
     return cy.get(homeSelectors.cartButton);
   }
 }

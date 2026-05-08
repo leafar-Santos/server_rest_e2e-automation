@@ -1,23 +1,23 @@
 import LoginPage from "../pages/LoginPage";
 
 class LoginActions {
-  accessLoginPage() {
+  accessLoginPage(): void {
     LoginPage.visit();
   }
 
-  fillEmail(email) {
+  fillEmail(email: string): void {
     LoginPage.emailInput().clear().type(email);
   }
 
-  fillPassword(password) {
+  fillPassword(password: string): void {
     LoginPage.passwordInput().clear().type(password, { log: false });
   }
 
-  submitLogin() {
+  submitLogin(): void {
     LoginPage.loginButton().click();
   }
 
-  login(email, password) {
+  login(email: string, password: string): void {
     this.fillEmail(email);
     this.fillPassword(password);
     this.submitLogin();

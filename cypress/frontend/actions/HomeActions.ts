@@ -1,24 +1,24 @@
 import HomePage from "../pages/HomePage";
 
 class HomeActions {
-  accessHomePage() {
+  accessHomePage(): void {
     HomePage.visit();
   }
 
-  addFirstProductToCart() {
+  addFirstProductToCart(): void {
     HomePage.addToCartButtons().first().click();
   }
 
-  addProductToCartByIndex(index) {
+  addProductToCartByIndex(index: number): void {
     HomePage.addToCartButtons().eq(index).click();
   }
 
-  addTwoProductsToCart() {
+  addTwoProductsToCart(): void {
     this.addProductToCartByIndex(0);
     this.addProductToCartByIndex(1);
   }
 
-  accessCart() {
+  accessCart(): void {
     HomePage.cartButton().click();
   }
 }

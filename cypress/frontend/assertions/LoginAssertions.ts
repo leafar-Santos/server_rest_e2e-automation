@@ -1,18 +1,18 @@
 class LoginAssertions {
-  shouldBeRedirectedToHome() {
+  shouldBeRedirectedToHome(): void {
     cy.url().should("not.include", "/login");
     cy.url().should("include", "/home");
   }
 
-  shouldDisplayInvalidCredentialsMessage(message) {
+  shouldDisplayInvalidCredentialsMessage(message: string): void {
     cy.contains(message).should("be.visible");
   }
 
-  shouldDisplayRequiredEmailMessage(message) {
+  shouldDisplayRequiredEmailMessage(message: string): void {
     cy.contains(message).should("be.visible");
   }
 
-  shouldDisplayRequiredPasswordMessage(message) {
+  shouldDisplayRequiredPasswordMessage(message: string): void {
     cy.contains(message).should("be.visible");
   }
 }

@@ -4,4 +4,4 @@ export const cadastroSelectors = {
   passwordInput: '[data-testid="password"]',
   registerButton: '[data-testid="cadastrar"]',
   loginLink: '[data-testid="entrar"]'
-};
+} as const;

@@ -1,19 +1,19 @@
 import { loginSelectors } from "../selectors/loginSelectors";
 
 class LoginPage {
-  visit() {
+  visit(): void {
     cy.visit("/login");
   }
 
-  emailInput() {
+  emailInput(): Cypress.Chainable<JQuery<HTMLElement>> {
     return cy.get(loginSelectors.emailInput);
   }
 
-  passwordInput() {
+  passwordInput(): Cypress.Chainable<JQuery<HTMLElement>> {
     return cy.get(loginSelectors.passwordInput);
   }
 
-  loginButton() {
+  loginButton(): Cypress.Chainable<JQuery<HTMLElement>> {
     return cy.get(loginSelectors.loginButton);
   }
 }

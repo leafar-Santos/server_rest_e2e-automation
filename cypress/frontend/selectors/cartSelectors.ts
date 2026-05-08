@@ -3,4 +3,4 @@ export const cartSelectors = {
   productTitle: ".card-title",
   increaseQuantityButton: '[data-testid="product-increase-quantity"]',
   productQuantity: '[data-testid="shopping-cart-product-quantity"]'
-};
+} as const;

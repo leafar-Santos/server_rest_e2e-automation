@@ -1,27 +1,27 @@
 import CadastroPage from "../pages/CadastroPage";
 
 class CadastroActions {
-  accessCadastroPage() {
+  accessCadastroPage(): void {
     CadastroPage.visit();
   }
 
-  fillName(name) {
+  fillName(name: string): void {
     CadastroPage.nameInput().clear().type(name);
   }
 
-  fillEmail(email) {
+  fillEmail(email: string): void {
     CadastroPage.emailInput().clear().type(email);
   }
 
-  fillPassword(password) {
+  fillPassword(password: string): void {
     CadastroPage.passwordInput().clear().type(password, { log: false });
   }
 
-  submitCadastro() {
+  submitCadastro(): void {
     CadastroPage.registerButton().click();
   }
 
-  register(name, email, password) {
+  register(name: string, email: string, password: string): void {
     this.fillName(name);
     this.fillEmail(email);
     this.fillPassword(password);

@@ -1,23 +1,23 @@
 import { cadastroSelectors } from "../selectors/cadastroSelectors";
 
 class CadastroPage {
-  visit() {
+  visit(): void {
     cy.visit("/cadastrarusuarios");
   }
 
-  nameInput() {
+  nameInput(): Cypress.Chainable<JQuery<HTMLElement>> {
     return cy.get(cadastroSelectors.nameInput);
   }
 
-  emailInput() {
+  emailInput(): Cypress.Chainable<JQuery<HTMLElement>> {
     return cy.get(cadastroSelectors.emailInput);
   }
 
-  passwordInput() {
+  passwordInput(): Cypress.Chainable<JQuery<HTMLElement>> {
     return cy.get(cadastroSelectors.passwordInput);
   }
 
-  registerButton() {
+  registerButton(): Cypress.Chainable<JQuery<HTMLElement>> {
     return cy.get(cadastroSelectors.registerButton);
   }
 }

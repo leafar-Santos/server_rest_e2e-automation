@@ -3,13 +3,18 @@ import CartActions from "../../../frontend/actions/CartActions";
 import CartAssertions from "../../../frontend/assertions/CartAssertions";
 import ProductIntercepts from "../../../frontend/intercepts/ProductIntercepts";
 import { createUserPayload } from "../../../shared/utils/userFactory";
+import type { UserPayload } from "../../../shared/types/userTypes";
+
+interface LoginFixture {
+  validUser: Partial<UserPayload> & { emailPrefix?: string };
+}
 
 describe("Carrinho - Frontend", () => {
-  let user;
-  let createdUserId = null;
+  let user: UserPayload;
+  let createdUserId: string | null = null;
 
   before(() => {
-    cy.fixture("frontend/login/loginData").then((loginData) => {
+    cy.fixture<LoginFixture>("frontend/login/loginData").then((loginData) => {
       user = createUserPayload({
         ...loginData.validUser,
         emailPrefix: "qa.cypress.carrinho",
