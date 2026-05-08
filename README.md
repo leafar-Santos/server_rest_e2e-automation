@@ -1,46 +1,31 @@
-# ServerRest E2E Automation
+# ServerRest E2E e API Automation
 
-Framework profissional de automação de testes E2E e API utilizando Cypress.
+Framework de automação de testes frontend e API desenvolvido com Cypress e TypeScript.
 
-O projeto foi estruturado com foco em:
-
-* Escalabilidade
-* Reutilização de código
-* Separação de responsabilidades
-* Facilidade de manutenção
-* Execução local e CI/CD
-* Testes frontend e API no mesmo framework
+O objetivo do projeto é validar fluxos E2E e APIs REST utilizando uma arquitetura organizada, reutilizável e preparada para CI/CD.
 
 ---
+# Tecnologias utilizadas
 
-# Objetivos do Projeto
-
-Este framework foi criado para validar:
-
-* Fluxos frontend (E2E)
-* APIs REST
-* Integrações frontend + backend
-* Fluxos completos de usuário
-* Regressão automatizada
-
-O projeto utiliza arquitetura em camadas para reduzir acoplamento e facilitar evolução da suíte.
-
+- Cypress
+- TypeScript
+- Allure Report disponível na seção about no git
+- GitHub Actions
+- Node.js
+- npm
+- dotenv
+- cross-env
 ---
 
-# Arquitetura Utilizada
+# Arquitetura
 
-## Arquitetura em Camadas (Layered Architecture)
-
-O framework foi dividido em responsabilidades específicas.
-
-## Estrutura
+O projeto foi estruturado utilizando separação por responsabilidades para facilitar manutenção e escalabilidade da suíte.
 
 ```text
 cypress/
-│
-├── e2e/
-│   ├── frontend/
-│   └── api/
+├── api/
+│   ├── assertions/
+│   └── services/
 │
 ├── frontend/
 │   ├── actions/
@@ -49,296 +34,74 @@ cypress/
 │   ├── pages/
 │   └── selectors/
 │
-├── api/
-│   ├── services/
-│   └── assertions/
+├── e2e/
+│   ├── api/
+│   └── frontend/
 │
 ├── fixtures/
-│   ├── frontend/
-│   └── api/
-│
 ├── shared/
-│   └── utils/
-│
 └── support/
 ```
 
----
+## Por que essa arquitetura?
 
-# Explicação da Arquitetura
+A separação em camadas evita acoplamento entre testes, seletores, regras e requisições.
 
-## e2e/
+Com isso, o projeto fica:
 
-Contém apenas os testes.
-
-Nenhuma regra de negócio ou seletor fica diretamente dentro das specs.
-
-Responsabilidade:
-
-* Fluxo do teste
-* Orquestração das ações
-* Leitura do cenário
+- mais legível;
+- mais reutilizável;
+- mais simples de manter;
+- preparado para crescimento da suíte.
 
 ---
 
-## frontend/pages
-
-Responsável por mapear elementos da interface.
-
-Exemplo:
-
-* Inputs
-* Botões
-* Tabelas
-* Labels
-
-Objetivo:
-Centralizar seletores.
-
-Se um seletor mudar, a alteração acontece em apenas um local.
-
----
-
-## frontend/actions
-
-Responsável pelas ações realizadas na tela.
-
-Exemplo:
-
-* Login
-* Cadastro
-* Adicionar produto ao carrinho
-
-Objetivo:
-
-Evitar duplicação de código e aumentar reutilização.
-
----
-
-## frontend/assertions
-
-Responsável pelas validações frontend.
-
-Exemplo:
-
-* Mensagens
-* Redirecionamentos
-* Estados visuais
-* Quantidade de itens
-
-Objetivo:
-
-Centralizar validações.
-
----
-
-## frontend/intercepts
-
-Responsável pelos intercepts de rede.
-
-Exemplo:
-
-* Interceptar GET /produtos
-* Validar status de APIs utilizadas pelo frontend
-* Esperar carregamentos
-
-Objetivo:
-
-Aumentar estabilidade e reduzir flakiness.
-
----
-
-## api/services
-
-Responsável pela comunicação HTTP.
-
-Exemplo:
-
-* GET /usuarios
-* POST /usuarios
-* DELETE /usuarios
-
-Objetivo:
-
-Separar requisições da lógica dos testes.
-
----
-
-## api/assertions
-
-Responsável pelas validações de APIs.
-
-Exemplo:
-
-* Status code
-* Contrato
-* Campos obrigatórios
-* Estrutura de resposta
-
-Objetivo:
-
-Padronizar validações.
-
----
-
-## shared/utils
-
-Responsável por componentes reutilizáveis.
-
-Exemplo:
-
-* Factories
-* Helpers
-* Builders
-* Geradores de massa
-
-Objetivo:
-
-Reutilização entre frontend e API.
-
----
-
-# Por que utilizamos esse modelo?
-
-Esse modelo foi escolhido porque:
-
-* Facilita manutenção
-* Reduz duplicação de código
-* Permite crescimento da suíte
-* Facilita onboarding
-* Melhora legibilidade
-* Facilita debugging
-* Permite reutilização entre frontend e API
-* Aproxima o projeto de frameworks enterprise
-
-Sem separação em camadas, frameworks Cypress costumam ficar acoplados rapidamente.
-
----
-
-# Tecnologias Utilizadas
-
-## Linguagem
-
-* JavaScript
-
-## Framework de testes
-
-* Cypress
-
-## Relatórios
-
-* Allure Report
-
-## Gerenciamento de ambiente
-
-* dotenv
-* cross-env
-
-## Integração contínua
-
-* GitHub Actions
-
-## Gerenciador de pacotes
-
-* npm
-
----
-
-# Funcionalidades Implementadas
+# Funcionalidades implementadas
 
 ## Frontend
 
-* Login
-* Cadastro de usuário
-* Carrinho
-* Sessões reutilizáveis
-* Intercepts
-* Assertions customizadas
-* Retry inteligente
+- Login
+- Cadastro de usuário
+- Carrinho
+- Sessions com `cy.session()`
+- Intercepts
+- Retry inteligente
 
 ## API
 
-* Cadastro de usuário
-* Busca de usuário
-* Busca por ID
-* Exclusão de usuário
-* Busca de produtos
-* Busca de produto por ID
+- Cadastro de usuário
+- Consulta de usuários
+- Busca por ID
+- Exclusão de usuário
+- Consulta de produtos
 
 ---
 
-# Recursos Avançados
+# Relatórios Allure
 
-## Sessions
+O projeto possui integração com Allure Reports para geração de evidências automatizadas.
 
-Utilização de `cy.session()` para reaproveitamento de login.
+## Exemplos
 
-Benefícios:
+### Dashboard
 
-* Maior velocidade
-* Menor consumo de execução
-* Menor repetição de autenticação
+![Dashboard](./img_readme/img1.png)
 
----
+### Execução dos testes
 
-## Retry Inteligente
+![Suites](./img_readme/img2.png)
 
-Configuração de retries para reduzir flakiness.
+### Evidências e steps
 
----
+![Gráficos](./img_readme/img3.png)
 
-## Intercepts
+### Trends e métricas
 
-Uso de intercepts para:
-
-* Esperar chamadas críticas
-* Validar APIs consumidas pelo frontend
-* Aumentar estabilidade dos testes
+![Comportamentos](./img_readme/img4.png)
 
 ---
 
-## Massa Dinâmica
-
-Criação dinâmica de usuários.
-
-Benefícios:
-
-* Evita conflito de massa
-* Evita poluição de ambiente
-* Permite paralelismo
-
----
-
-# Configuração do Projeto
-
-## Pré-requisitos
-
-Instalar:
-
-* Node.js 22+
-* npm
-* Git
-* Allure CLI
-
----
-
-# Instalação
-
-## Clonar projeto
-
-```bash
-git clone https://github.com/SEU-USUARIO/server_rest_e2e-automation.git
-```
-
----
-
-## Entrar na pasta
-
-```bash
-cd server_rest_e2e-automation
-```
-
----
+# Execução do projeto
 
 ## Instalar dependências
 
@@ -348,63 +111,31 @@ npm install
 
 ---
 
-# Arquivos de Ambiente
-
-## .env.qa
-
-```env
-CYPRESS_baseUrl=https://front.serverest.dev
-CYPRESS_apiUrl=https://serverest.dev
-```
-
----
-
-## .env.local
-
-```env
-CYPRESS_baseUrl=https://front.serverest.dev
-CYPRESS_apiUrl=https://serverest.dev
-```
-
----
-
-# Como Executar
-
-## Abrir Cypress
-
-### Ambiente QA
-
-```bash
-npm run cy:open:qa
-```
-
-### Ambiente Local
-
-```bash
-npm run cy:open:local
-```
-
----
-
-# Execução Headless
-
-## Ambiente QA
+## Executar frontend + API
 
 ```bash
 npm run cy:run:qa
 ```
 
-## Ambiente Local
+---
+
+## Executar apenas API
 
 ```bash
-npm run cy:run:local
+npm run cy:run:api:qa
 ```
 
 ---
 
-# Relatórios Allure
+## Executar apenas frontend
 
-## Executar testes e gerar relatório
+```bash
+npm run cy:run:frontend:qa
+```
+
+---
+
+# Gerar relatório Allure
 
 ```bash
 npm run test:allure:qa
@@ -412,56 +143,13 @@ npm run test:allure:qa
 
 ---
 
-# GitHub Actions
+# Integração contínua
 
-O projeto possui integração CI/CD utilizando GitHub Actions.
+O projeto possui pipeline configurada no GitHub Actions para:
 
-A pipeline executa:
-
-* Instalação de dependências
-* Execução dos testes
-* Geração de relatório Allure
-* Publicação de artefatos
+- Execução automatizada dos testes;
+- Geração do relatório Allure;
+- Publicação das evidências.
 
 ---
 
-# Branch Strategy
-
-## Branches utilizadas
-
-```text
-main
-Developer
-feature/*
-hotfix/*
-```
-
----
-
-# Padrões Utilizados
-
-## Convenções
-
-* Uma responsabilidade por camada
-* Specs limpas
-* Massa desacoplada
-* Assertions reutilizáveis
-* Services reutilizáveis
-* Selectors centralizados
-* Imports organizados
-
----
-
-# Melhorias Futuras
-
-Possíveis evoluções:
-
-* Contract Testing
-* Schema Validation
-* Testes de Performance
-* Integração com BrowserStack
-* Testcontainers
-* Dashboard de execução
-* Execução paralela
-* Docker
-* Integração com Jira
