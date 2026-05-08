@@ -465,9 +465,3 @@ Possíveis evoluções:
 * Execução paralela
 * Docker
 * Integração com Jira
-
----
-
-# Autor
-
-Projeto criado com foco em automação profissional frontend e API utilizando Cypress.
