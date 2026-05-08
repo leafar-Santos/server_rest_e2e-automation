@@ -1,13 +1,13 @@
-import LoginActions from "../../actions/LoginActions";
-import LoginAssertions from "../../assertions/LoginAssertions";
-import { createUserPayload } from "../../utils/userFactory";
+import LoginActions from "../../../frontend/actions/LoginActions";
+import LoginAssertions from "../../../frontend/assertions/LoginAssertions";
+import { createUserPayload } from "../../../shared/utils/userFactory";
 
 describe("Login - Frontend", () => {
   let user;
   let createdUserId = null;
 
   before(() => {
-    cy.fixture("login/loginData").then((loginData) => {
+    cy.fixture("frontend/login/loginData").then((loginData) => {
       user = createUserPayload({
         ...loginData.validUser,
         emailPrefix: "qa.cypress.login"
@@ -54,7 +54,7 @@ describe("Login - Frontend", () => {
   });
 
   it("deve validar obrigatoriedade dos campos de login", () => {
-    cy.fixture("login/loginData").then((loginData) => {
+    cy.fixture("frontend/login/loginData").then((loginData) => {
       LoginActions.submitLogin();
 
       LoginAssertions.shouldDisplayRequiredEmailMessage(

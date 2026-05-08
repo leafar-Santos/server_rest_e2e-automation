@@ -1,13 +1,13 @@
-import CadastroActions from "../../actions/CadastroActions";
-import CadastroAssertions from "../../assertions/CadastroAssertions";
-import { createUserPayload } from "../../utils/userFactory";
+import CadastroActions from "../../../frontend/actions/CadastroActions";
+import CadastroAssertions from "../../../frontend/assertions/CadastroAssertions";
+import { createUserPayload } from "../../../shared/utils/userFactory";
 
 describe("Cadastro de Usuário - Frontend", () => {
   let createdUser;
   let createdUserId = null;
 
   before(() => {
-    cy.fixture("cadastro/cadastroData").then((cadastroData) => {
+    cy.fixture("frontend/cadastro/cadastroData").then((cadastroData) => {
       createdUser = createUserPayload(cadastroData.validUser);
     });
   });
@@ -23,7 +23,7 @@ describe("Cadastro de Usuário - Frontend", () => {
   });
 
   it("deve cadastrar usuário com sucesso pelo front", () => {
-  cy.fixture("cadastro/cadastroData").then((cadastroData) => {
+  cy.fixture("frontend/cadastro/cadastroData").then((cadastroData) => {
     CadastroActions.register(
       createdUser.nome,
       createdUser.email,
@@ -41,7 +41,7 @@ describe("Cadastro de Usuário - Frontend", () => {
 });
 
   it("deve exibir erro ao tentar cadastrar usuário já existente", () => {
-    cy.fixture("cadastro/cadastroData").then((cadastroData) => {
+    cy.fixture("frontend/cadastro/cadastroData").then((cadastroData) => {
       CadastroActions.register(
         createdUser.nome,
         createdUser.email,
@@ -55,7 +55,7 @@ describe("Cadastro de Usuário - Frontend", () => {
   });
 
   it("deve validar campos obrigatórios ao tentar cadastrar sem preencher dados", () => {
-    cy.fixture("cadastro/cadastroData").then((cadastroData) => {
+    cy.fixture("frontend/cadastro/cadastroData").then((cadastroData) => {
       CadastroActions.submitCadastro();
 
       CadastroAssertions.shouldDisplayRequiredNameMessage(

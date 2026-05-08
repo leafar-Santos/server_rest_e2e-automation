@@ -1,15 +1,15 @@
-import HomeActions from "../../actions/HomeActions";
-import CartActions from "../../actions/CartActions";
-import CartAssertions from "../../assertions/CartAssertions";
-import ProductIntercepts from "../../intercepts/ProductIntercepts";
-import { createUserPayload } from "../../utils/userFactory";
+import HomeActions from "../../../frontend/actions/HomeActions";
+import CartActions from "../../../frontend/actions/CartActions";
+import CartAssertions from "../../../frontend/assertions/CartAssertions";
+import ProductIntercepts from "../../../frontend/intercepts/ProductIntercepts";
+import { createUserPayload } from "../../../shared/utils/userFactory";
 
 describe("Carrinho - Frontend", () => {
   let user;
   let createdUserId = null;
 
   before(() => {
-    cy.fixture("login/loginData").then((loginData) => {
+    cy.fixture("frontend/login/loginData").then((loginData) => {
       user = createUserPayload({
         ...loginData.validUser,
         emailPrefix: "qa.cypress.carrinho",

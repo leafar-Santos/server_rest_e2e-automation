@@ -25,6 +25,7 @@ jobs:
     env:
       ENV_FILE: .env.qa
       CI: true
+      allure: true
 
     steps:
       - name: Checkout do projeto
@@ -39,11 +40,18 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
-      - name: Instalar Allure CLI
-        run: npm install -g allure-commandline@2.29.0
-
       - name: Executar testes Cypress
         run: npm run cy:run:qa
+
+      - name: Verificar Allure Results
+        if: always()
+        run: |
+          ls -la allure-results || true
+          find allure-results -type f || true
+
+      - name: Instalar Allure CLI
+        if: always()
+        run: npm install -g allure-commandline@2.29.0
 
       - name: Gerar relatório Allure
         if: always()

@@ -1,6 +1,6 @@
-import UserService from "../services/UserService";
-import LoginActions from "../actions/LoginActions";
-import LoginAssertions from "../assertions/LoginAssertions";
+import UserService from "../api/services/UserService";
+import LoginActions from "../frontend/actions/LoginActions";
+import LoginAssertions from "../frontend/assertions/LoginAssertions";
 
 Cypress.Commands.add("createUserByApi", (user) => {
   return UserService.create(user).then((response) => {
